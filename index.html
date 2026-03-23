@@ -402,6 +402,28 @@ main {
 .conv-up:nth-child(2){ animation-delay:1.6s; }
 .res-glow { animation: resPulse 2.4s ease-in-out infinite; }
 .geo { transition: opacity 0.7s ease; }
+
+/* ── ANIMATIONS: perforacion_geotermica ── */
+@keyframes pg-fluidRise {
+  0%   { opacity:0; transform:translateY(4px); }
+  30%  { opacity:0.85; }
+  70%  { opacity:0.85; }
+  100% { opacity:0; transform:translateY(-14px); }
+}
+@keyframes pg-scanPulse {
+  0%,100% { opacity:0.2; }
+  50%     { opacity:0.9; }
+}
+.pg-fr { animation: pg-fluidRise 2s ease-in-out infinite; }
+.pg-fr:nth-child(1){ animation-delay:0s; }
+.pg-fr:nth-child(2){ animation-delay:0.66s; }
+.pg-fr:nth-child(3){ animation-delay:1.33s; }
+.pg-sc { animation: pg-scanPulse 1.8s ease-in-out infinite; }
+.pg-sc:nth-child(1){ animation-delay:0s; }
+.pg-sc:nth-child(2){ animation-delay:0.6s; }
+.pg-sc:nth-child(3){ animation-delay:1.2s; }
+.pg-sc:nth-child(4){ animation-delay:1.8s; }
+.pg-sc:nth-child(5){ animation-delay:2.4s; }
 </style>
 </head>
 <body>
@@ -430,13 +452,13 @@ main {
     </div>
   </button>
 
-  <!-- RECURSO 02 — próximamente -->
-  <button class="rbtn disabled" onclick="return false">
+  <!-- RECURSO 02 -->
+  <button class="rbtn" onclick="showRecurso('perforacion_geotermica', this)">
     <div class="rnum">02</div>
     <div class="rinfo">
-      <div class="rtitle">Gradiente térmico</div>
-      <div class="rdesc">Variación de temperatura según contexto tectónico</div>
-      <div class="rtag soon">próximamente</div>
+      <div class="rtitle">Perforación geotérmica</div>
+      <div class="rdesc">Exploración, perforación y planta de generación</div>
+      <div class="rtag ready">disponible</div>
     </div>
   </button>
 
@@ -682,6 +704,236 @@ main {
 </div>
 <!-- ████ FIN RECURSO: reservorio ████ -->
 
+<!-- ════════════════════════════════════════════════════════
+     ████ RECURSO: perforacion_geotermica ████
+════════════════════════════════════════════════════════ -->
+<div id="recurso-perforacion_geotermica" class="recurso">
+  <div class="res-bar">
+    <div class="res-bar-title">perforación y planta geotérmica</div>
+    <div class="res-bar-sep"></div>
+    <div class="res-bar-step" id="steplbl-perforacion_geotermica">paso 1 de 5</div>
+  </div>
+  <div class="res-content">
+
+    <div class="diagram-wrap" id="wrap-perforacion_geotermica">
+      <div class="zbar">
+        <button class="zbtn" onclick="zoomIn('perforacion_geotermica')" title="+">+</button>
+        <div class="zlbl" id="zlbl-perforacion_geotermica">100%</div>
+        <button class="zbtn" onclick="zoomOut('perforacion_geotermica')" title="−">−</button>
+        <button class="zbtn" onclick="zoomReset('perforacion_geotermica')" style="font-size:9px;">↺</button>
+      </div>
+      <svg id="svg-perforacion_geotermica" viewBox="0 0 820 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="pg-bound"><rect width="820" height="500"/></clipPath>
+        <linearGradient id="pg-sky-g"    x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a5c" stop-opacity="0.9"/><stop offset="100%" stop-color="#243a50" stop-opacity="0.4"/></linearGradient>
+        <linearGradient id="pg-crust-g"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7a6245"/><stop offset="100%" stop-color="#56432a"/></linearGradient>
+        <linearGradient id="pg-mantle-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a7858"/><stop offset="100%" stop-color="#185838"/></linearGradient>
+        <linearGradient id="pg-ocore-g"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a87018"/><stop offset="100%" stop-color="#7a4c08"/></linearGradient>
+        <linearGradient id="pg-icore-g"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b84820"/><stop offset="100%" stop-color="#881808"/></linearGradient>
+        <linearGradient id="pg-magma-g"  x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#b82808"/><stop offset="55%" stop-color="#d05c18"/><stop offset="100%" stop-color="#e08828" stop-opacity="0.65"/></linearGradient>
+        <linearGradient id="pg-reserv-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#c05010" stop-opacity="0.92"/><stop offset="100%" stop-color="#d87828" stop-opacity="0.82"/></linearGradient>
+        <linearGradient id="pg-seal-g"   x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1e1a14"/><stop offset="100%" stop-color="#141008"/></linearGradient>
+        <linearGradient id="pg-well-g"   x1="1" y1="0" x2="0" y2="0"><stop offset="0%" stop-color="#4a4440"/><stop offset="100%" stop-color="#2a2420"/></linearGradient>
+        <linearGradient id="pg-fluid-g"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e08828" stop-opacity="0.9"/><stop offset="100%" stop-color="#c05010" stop-opacity="0.7"/></linearGradient>
+      </defs>
+      <g clip-path="url(#pg-bound)" id="pg-zoom">
+        <!-- capas base -->
+        <rect x="0" y="0"   width="820" height="62"  fill="url(#pg-sky-g)"/>
+        <rect x="0" y="62"  width="820" height="80"  fill="url(#pg-crust-g)"  opacity="0.92"/>
+        <rect x="0" y="142" width="820" height="140" fill="url(#pg-mantle-g)" opacity="0.86"/>
+        <rect x="0" y="282" width="820" height="115" fill="url(#pg-ocore-g)"  opacity="0.9"/>
+        <rect x="0" y="397" width="820" height="103" fill="url(#pg-icore-g)"  opacity="0.93"/>
+        <path d="M0 62 Q90 50 200 60 Q320 44 440 58 Q560 46 680 62 Q750 50 820 56 L820 62 Z" fill="#9a8060" opacity="0.4"/>
+        <line x1="0" y1="142" x2="820" y2="142" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="0" y1="282" x2="820" y2="282" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="0" y1="397" x2="820" y2="397" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+        <!-- PASO 1: reservorio completo (igual a paso 4 del recurso anterior) -->
+        <g id="pg-s1" class="geo" opacity="0">
+          <line x1="0" y1="142" x2="820" y2="142" stroke="rgba(196,180,138,0.35)" stroke-width="1" stroke-dasharray="9 5"/>
+          <line x1="0" y1="282" x2="820" y2="282" stroke="rgba(196,180,138,0.35)" stroke-width="1" stroke-dasharray="9 5"/>
+          <line x1="0" y1="397" x2="820" y2="397" stroke="rgba(196,180,138,0.35)" stroke-width="1" stroke-dasharray="9 5"/>
+          <ellipse cx="225" cy="222" rx="142" ry="52" fill="url(#pg-magma-g)" opacity="0.88"/>
+          <text x="225" y="219" text-anchor="middle" font-size="11" font-weight="600" fill="#f0c070" font-family="Georgia,serif" letter-spacing="0.1em">MAGMA</text>
+          <g class="heat-arr"><line x1="95"  y1="170" x2="95"  y2="130" stroke="#d84818" stroke-width="1.5" stroke-linecap="round"/><polygon points="95,126 90,136 100,136" fill="#d84818"/></g>
+          <g class="heat-arr"><line x1="155" y1="172" x2="155" y2="130" stroke="#d84818" stroke-width="1.5" stroke-linecap="round"/><polygon points="155,126 150,136 160,136" fill="#d84818"/></g>
+          <g class="heat-arr"><line x1="215" y1="170" x2="215" y2="130" stroke="#d84818" stroke-width="1.5" stroke-linecap="round"/><polygon points="215,126 210,136 220,136" fill="#d84818"/></g>
+          <g class="heat-arr"><line x1="275" y1="171" x2="275" y2="130" stroke="#d84818" stroke-width="1.5" stroke-linecap="round"/><polygon points="275,126 270,136 280,136" fill="#d84818"/></g>
+          <g class="heat-arr"><line x1="335" y1="170" x2="335" y2="130" stroke="#d84818" stroke-width="1.5" stroke-linecap="round"/><polygon points="335,126 330,136 340,136" fill="#d84818"/></g>
+          <rect x="63" y="65" width="400" height="16" rx="3" fill="url(#pg-seal-g)" opacity="0.96" stroke="#2a2018" stroke-width="0.8"/>
+          <line x1="80"  y1="65" x2="72"  y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="116" y1="65" x2="108" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="152" y1="65" x2="144" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="188" y1="65" x2="180" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="224" y1="65" x2="216" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="260" y1="65" x2="252" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="296" y1="65" x2="288" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="332" y1="65" x2="324" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="368" y1="65" x2="360" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="404" y1="65" x2="396" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="440" y1="65" x2="432" y2="81" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <text x="470" y="77" font-size="9" font-weight="600" fill="rgba(196,180,138,0.78)" font-family="Georgia,serif" letter-spacing="0.07em">SELLO</text>
+          <rect x="71" y="82" width="384" height="36" rx="5" fill="url(#pg-reserv-g)" class="res-glow"/>
+          <text x="263" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#f0d8a8" font-family="Georgia,serif" letter-spacing="0.1em">RESERVORIO GEOTÉRMICO</text>
+          <circle cx="628" cy="102" r="2" fill="#c4b48a" opacity="0.7"/>
+          <line x1="630" y1="102" x2="655" y2="102" stroke="#c4b48a" stroke-width="0.6" stroke-dasharray="4 3" opacity="0.6"/>
+          <text x="659" y="98"  font-size="10" font-weight="600" fill="#c4b48a" font-family="Georgia,serif">CORTEZA</text>
+          <circle cx="628" cy="212" r="2" fill="#5dcaa5" opacity="0.7"/>
+          <line x1="630" y1="212" x2="655" y2="212" stroke="#5dcaa5" stroke-width="0.6" stroke-dasharray="4 3" opacity="0.6"/>
+          <text x="659" y="208" font-size="10" font-weight="600" fill="#5dcaa5" font-family="Georgia,serif">MANTO</text>
+          <circle cx="628" cy="340" r="2" fill="#d09030" opacity="0.7"/>
+          <line x1="630" y1="340" x2="655" y2="340" stroke="#d09030" stroke-width="0.6" stroke-dasharray="4 3" opacity="0.6"/>
+          <text x="659" y="336" font-size="10" font-weight="600" fill="#d09030" font-family="Georgia,serif">NÚC. EXT.</text>
+          <circle cx="628" cy="450" r="2" fill="#e07050" opacity="0.7"/>
+          <line x1="630" y1="450" x2="655" y2="450" stroke="#e07050" stroke-width="0.6" stroke-dasharray="4 3" opacity="0.6"/>
+          <text x="659" y="446" font-size="10" font-weight="600" fill="#e07050" font-family="Georgia,serif">NÚC. INT.</text>
+        </g>
+
+        <!-- PASO 2: exploración geofísica -->
+        <g id="pg-s2" class="geo" opacity="0">
+          <rect x="63" y="130" width="400" height="16" rx="3" fill="url(#pg-seal-g)" opacity="0.85" stroke="#2a2018" stroke-width="0.8"/>
+          <rect x="71" y="147" width="384" height="36" rx="5" fill="url(#pg-reserv-g)" opacity="0.7"/>
+          <text x="263" y="169" text-anchor="middle" font-size="10" font-weight="600" fill="#f0d8a8" font-family="Georgia,serif">RESERVORIO</text>
+          <rect x="80"  y="80" width="7" height="44" rx="2" fill="#5dcaa5" opacity="0.85"/>
+          <rect x="160" y="80" width="7" height="44" rx="2" fill="#5dcaa5" opacity="0.85"/>
+          <rect x="240" y="80" width="7" height="44" rx="2" fill="#5dcaa5" opacity="0.85"/>
+          <rect x="320" y="80" width="7" height="44" rx="2" fill="#5dcaa5" opacity="0.85"/>
+          <rect x="400" y="80" width="7" height="44" rx="2" fill="#5dcaa5" opacity="0.85"/>
+          <text x="83"  y="74" text-anchor="middle" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">S1</text>
+          <text x="163" y="74" text-anchor="middle" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">S2</text>
+          <text x="243" y="74" text-anchor="middle" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">S3</text>
+          <text x="323" y="74" text-anchor="middle" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">S4</text>
+          <text x="403" y="74" text-anchor="middle" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">S5</text>
+          <text x="243" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#5dcaa5" font-family="Georgia,serif" letter-spacing="0.06em">SENSORES GEOFÍSICOS</text>
+          <g class="pg-sc"><line x1="83"  y1="124" x2="83"  y2="190" stroke="#5dcaa5" stroke-width="0.7" stroke-dasharray="3 3"/></g>
+          <g class="pg-sc"><line x1="163" y1="124" x2="163" y2="190" stroke="#5dcaa5" stroke-width="0.7" stroke-dasharray="3 3"/></g>
+          <g class="pg-sc"><line x1="243" y1="124" x2="243" y2="190" stroke="#5dcaa5" stroke-width="0.7" stroke-dasharray="3 3"/></g>
+          <g class="pg-sc"><line x1="323" y1="124" x2="323" y2="190" stroke="#5dcaa5" stroke-width="0.7" stroke-dasharray="3 3"/></g>
+          <g class="pg-sc"><line x1="403" y1="124" x2="403" y2="190" stroke="#5dcaa5" stroke-width="0.7" stroke-dasharray="3 3"/></g>
+          <ellipse cx="263" cy="165" rx="180" ry="24" fill="none" stroke="#e08828" stroke-width="0.8" stroke-dasharray="5 4" opacity="0.6"/>
+          <text x="470" y="170" font-size="9" fill="#e08828" font-family="Georgia,serif">anomalía térmica</text>
+          <line x1="466" y1="167" x2="448" y2="164" stroke="#e08828" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.5"/>
+        </g>
+
+        <!-- PASO 3: perforación exploratoria -->
+        <g id="pg-s3" class="geo" opacity="0">
+          <rect x="63" y="130" width="400" height="16" rx="3" fill="url(#pg-seal-g)" opacity="0.9" stroke="#2a2018" stroke-width="0.8"/>
+          <rect x="71" y="147" width="384" height="36" rx="5" fill="url(#pg-reserv-g)" opacity="0.72"/>
+          <text x="263" y="169" text-anchor="middle" font-size="10" font-weight="600" fill="#f0d8a8" font-family="Georgia,serif">RESERVORIO</text>
+          <polygon points="263,78 254,126 272,126" fill="#3a3428" opacity="0.92"/>
+          <rect x="256" y="120" width="14" height="8" rx="2" fill="#4a4438" opacity="0.92"/>
+          <line x1="254" y1="78" x2="244" y2="78" stroke="#3a3428" stroke-width="1.2" opacity="0.6"/>
+          <line x1="272" y1="78" x2="282" y2="78" stroke="#3a3428" stroke-width="1.2" opacity="0.6"/>
+          <text x="295" y="87" font-size="9" font-weight="600" fill="rgba(196,180,138,0.85)" font-family="Georgia,serif" letter-spacing="0.05em">TORRE EXPLORATORIA</text>
+          <rect x="260" y="126" width="7" height="70" rx="1" fill="url(#pg-well-g)" opacity="0.9"/>
+          <rect x="260" y="130" width="7" height="16" rx="0" fill="#1a1410" opacity="0.96"/>
+          <polygon points="263,196 258,186 268,186" fill="#5a5448" opacity="0.9"/>
+          <text x="295" y="193" font-size="9" fill="rgba(196,180,138,0.75)" font-family="Georgia,serif">Ø pequeño · confirmación</text>
+          <line x1="291" y1="190" x2="272" y2="188" stroke="rgba(196,180,154,0.35)" stroke-width="0.5" stroke-dasharray="3 3"/>
+        </g>
+
+        <!-- PASO 4: perforación de producción -->
+        <g id="pg-s4" class="geo" opacity="0">
+          <rect x="63" y="130" width="400" height="16" rx="3" fill="url(#pg-seal-g)" opacity="0.9" stroke="#2a2018" stroke-width="0.8"/>
+          <rect x="71" y="147" width="384" height="36" rx="5" fill="url(#pg-reserv-g)" opacity="0.72" class="res-glow"/>
+          <text x="263" y="169" text-anchor="middle" font-size="10" font-weight="600" fill="#f0d8a8" font-family="Georgia,serif">RESERVORIO PRESURIZADO</text>
+          <polygon points="200,74 188,126 212,126" fill="#3a3428" opacity="0.95"/>
+          <rect x="186" y="118" width="26" height="10" rx="2" fill="#4a4438"/>
+          <line x1="188" y1="74" x2="176" y2="74" stroke="#3a3428" stroke-width="1.2" opacity="0.6"/>
+          <line x1="212" y1="74" x2="224" y2="74" stroke="#3a3428" stroke-width="1.2" opacity="0.6"/>
+          <text x="235" y="84" font-size="9" font-weight="600" fill="rgba(196,180,154,0.85)" font-family="Georgia,serif">POZO DE PRODUCCIÓN</text>
+          <rect x="192" y="126" width="14" height="70" rx="2" fill="url(#pg-well-g)" opacity="0.9"/>
+          <rect x="192" y="130" width="14" height="16" rx="0" fill="#1a1410" opacity="0.96"/>
+          <g class="pg-fr"><rect x="194" y="162" width="10" height="22" rx="2" fill="url(#pg-fluid-g)" opacity="0.85"/></g>
+          <g class="pg-fr"><rect x="194" y="143" width="10" height="16" rx="2" fill="url(#pg-fluid-g)" opacity="0.7"/></g>
+          <g class="pg-fr"><rect x="194" y="129" width="10" height="10" rx="2" fill="url(#pg-fluid-g)" opacity="0.6"/></g>
+          <text x="235" y="152" font-size="9" fill="#e08828" font-family="Georgia,serif">fluido asciende</text>
+          <text x="235" y="163" font-size="9" fill="#e08828" font-family="Georgia,serif">por presión propia</text>
+          <line x1="231" y1="158" x2="210" y2="152" stroke="#e08828" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.5"/>
+        </g>
+
+        <!-- PASO 5: planta geotérmica completa -->
+        <g id="pg-s5" class="geo" opacity="0">
+          <rect x="63" y="130" width="400" height="16" rx="3" fill="url(#pg-seal-g)" opacity="0.6" stroke="#2a2018" stroke-width="0.6"/>
+          <rect x="71" y="147" width="384" height="36" rx="5" fill="url(#pg-reserv-g)" opacity="0.35"/>
+          <rect x="130" y="108" width="14" height="75" rx="2" fill="url(#pg-well-g)" opacity="0.8"/>
+          <rect x="130" y="130" width="14" height="16" rx="0" fill="#1a1410" opacity="0.85"/>
+          <text x="120" y="103" text-anchor="middle" font-size="8" fill="#a89878" font-family="Georgia,serif">prod.</text>
+          <rect x="430" y="108" width="12" height="75" rx="2" fill="#2a3828" opacity="0.8"/>
+          <rect x="430" y="130" width="12" height="16" rx="0" fill="#1a2810" opacity="0.85"/>
+          <text x="436" y="103" text-anchor="middle" font-size="8" fill="#3a8848" font-family="Georgia,serif">reiny.</text>
+          <line x1="137" y1="108" x2="137" y2="88" stroke="#5a5048" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="137" y1="88" x2="248" y2="88" stroke="#5a5048" stroke-width="3.5" stroke-linecap="round"/>
+          <rect x="246" y="82" width="36" height="44" rx="6" fill="#2a3028" stroke="#3a4038" stroke-width="0.8"/>
+          <text x="264" y="100" text-anchor="middle" font-size="8" font-weight="600" fill="#8aba88" font-family="Georgia,serif">SEP.</text>
+          <text x="264" y="113" text-anchor="middle" font-size="7" fill="#5a8a58" font-family="Georgia,serif">separa fases</text>
+          <line x1="264" y1="82" x2="264" y2="72" stroke="#90c8f0" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="264" y1="72" x2="350" y2="72" stroke="#90c8f0" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="350" y1="72" x2="350" y2="82" stroke="#90c8f0" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse cx="364" cy="82" rx="15" ry="13" fill="#283828" stroke="#3a5038" stroke-width="0.8"/>
+          <text x="364" y="79" text-anchor="middle" font-size="7" fill="#8aba88" font-family="Georgia,serif">TUR-</text>
+          <text x="364" y="88" text-anchor="middle" font-size="7" fill="#8aba88" font-family="Georgia,serif">BINA</text>
+          <rect x="380" y="74" width="32" height="20" rx="4" fill="#283828" stroke="#3a5038" stroke-width="0.8"/>
+          <text x="396" y="83" text-anchor="middle" font-size="7" fill="#c8d890" font-family="Georgia,serif">GEN.</text>
+          <text x="396" y="90" text-anchor="middle" font-size="7" fill="#c8d890" font-family="Georgia,serif">⚡</text>
+          <line x1="412" y1="84" x2="445" y2="84" stroke="#c8d890" stroke-width="1.5" stroke-dasharray="4 2"/>
+          <text x="448" y="88" font-size="8" fill="#c8d890" font-family="Georgia,serif">electricidad</text>
+          <line x1="282" y1="104" x2="282" y2="126" stroke="#3a78b8" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="282,126 272,158 292,158" fill="#283838" stroke="#3a5048" stroke-width="0.8"/>
+          <text x="300" y="148" font-size="8" fill="#5dcaa5" font-family="Georgia,serif">torre enfr.</text>
+          <line x1="292" y1="152" x2="432" y2="152" stroke="#3a78b8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="432" y1="152" x2="432" y2="108" stroke="#3a78b8" stroke-width="2" stroke-linecap="round"/>
+          <g class="pg-fr" style="animation-direction:reverse;"><rect x="431" y="112" width="9" height="16" rx="2" fill="#1a5a9a" opacity="0.7"/></g>
+          <g class="pg-fr"><rect x="132" y="118" width="10" height="16" rx="2" fill="url(#pg-fluid-g)" opacity="0.75"/></g>
+          <text x="470" y="92" font-size="8.5" font-weight="600" fill="rgba(196,180,138,0.75)" font-family="Georgia,serif" letter-spacing="0.05em">CICLO COMPLETO</text>
+          <text x="470" y="104" font-size="8" fill="#58544a" font-family="Georgia,serif">producción</text>
+          <text x="470" y="115" font-size="8" fill="#58544a" font-family="Georgia,serif">→ generación</text>
+          <text x="470" y="126" font-size="8" fill="#58544a" font-family="Georgia,serif">→ reinyección</text>
+        </g>
+
+      </g>
+      </svg>
+    </div>
+
+    <div class="step-controls">
+      <button class="sbtn" id="prev-perforacion_geotermica" onclick="stepMove('perforacion_geotermica',-1)" disabled>← anterior</button>
+      <div class="sdots" id="dots-perforacion_geotermica">
+        <div class="sdot active" onclick="stepGo('perforacion_geotermica',0)"></div>
+        <div class="sdot"        onclick="stepGo('perforacion_geotermica',1)"></div>
+        <div class="sdot"        onclick="stepGo('perforacion_geotermica',2)"></div>
+        <div class="sdot"        onclick="stepGo('perforacion_geotermica',3)"></div>
+        <div class="sdot"        onclick="stepGo('perforacion_geotermica',4)"></div>
+      </div>
+      <button class="sbtn" id="next-perforacion_geotermica" onclick="stepMove('perforacion_geotermica',1)">siguiente →</button>
+    </div>
+
+    <div class="info-wrap">
+      <div class="icard visible" id="perforacion_geotermica-i0" style="border-color:#2a2620;">
+        <div class="icard-title" style="color:#c4b48a;">Paso 1 · Sistema geotérmico formado</div>
+        <div class="icard-body">Partimos del <strong>reservorio activo</strong>: sello impermeable, magma en el manto superior y fluido presurizado en la corteza. Este es el punto de partida para la explotación.</div>
+      </div>
+      <div class="icard" id="perforacion_geotermica-i1" style="border-color:#2a8a68;">
+        <div class="icard-title" style="color:#5dcaa5;">Paso 2 · Exploración geofísica</div>
+        <div class="icard-body"><strong>Sensores geofísicos</strong> en superficie miden gradiente térmico y anomalías sísmicas. Las anomalías térmicas sobre el reservorio identifican el punto óptimo de perforación sin intervenir el sistema.</div>
+      </div>
+      <div class="icard" id="perforacion_geotermica-i2" style="border-color:#7a6848;">
+        <div class="icard-title" style="color:#a08858;">Paso 3 · Perforación exploratoria</div>
+        <div class="icard-body">Un <strong>pozo exploratorio de diámetro pequeño</strong> perfora el sello para confirmar el reservorio, medir temperatura y presión del fluido antes de la inversión mayor.</div>
+      </div>
+      <div class="icard" id="perforacion_geotermica-i3" style="border-color:#c05010;">
+        <div class="icard-title" style="color:#d08040;">Paso 4 · Perforación de producción</div>
+        <div class="icard-body">El <strong>pozo de producción de mayor diámetro</strong> permite que la presión propia del reservorio impulse el fluido bifásico a superficie sin bombeo.</div>
+      </div>
+      <div class="icard" id="perforacion_geotermica-i4" style="border-color:#3a6838;">
+        <div class="icard-title" style="color:#8aba88;">Paso 5 · Planta geotérmica completa</div>
+        <div class="icard-body">El fluido llega al <strong>separador</strong>: el vapor mueve la turbina que acciona el <strong>generador eléctrico</strong>; el agua condensada pasa por la torre de enfriamiento y se <strong>reinyecta al reservorio</strong>, cerrando el ciclo y sosteniendo la presión a largo plazo.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ████ FIN RECURSO: perforacion_geotermica ████ -->
+
 
 </main>
 </div><!-- end layout -->
@@ -813,6 +1065,52 @@ const steppers = {
         show('rc-heat'); show('rc-seal-solid');
         setTimeout(() => show('rc-reserv'), 1400);
       }
+    }
+  },
+
+  /* ── perforacion_geotermica ── */
+  perforacion_geotermica: {
+    total: 5,
+    dotColors: ['#c4b48a','#2a8a68','#a08858','#c05010','#3a6838'],
+    labels: [
+      'paso 1 de 5 · sistema geotérmico formado',
+      'paso 2 de 5 · exploración geofísica',
+      'paso 3 de 5 · perforación exploratoria',
+      'paso 4 de 5 · perforación de producción',
+      'paso 5 de 5 · planta geotérmica completa',
+    ],
+    _z: { scale:1, tx:0, ty:0 },
+    _zTargets: [
+      { scale:1,   tx:0,    ty:0   },
+      { scale:2,   tx:-110, ty:-10 },
+      { scale:2,   tx:-110, ty:-10 },
+      { scale:2,   tx:-110, ty:-10 },
+      { scale:2,   tx:-110, ty:-10 },
+    ],
+    _animZ(ts, ttx, tty, dur=900) {
+      const g = document.getElementById('pg-zoom');
+      if (!g) return;
+      const z = this._z;
+      const ss=z.scale, stx=z.tx, sty=z.ty, t0=performance.now();
+      const tick = now => {
+        const p = Math.min(1,(now-t0)/dur);
+        const e = p<0.5 ? 2*p*p : -1+(4-2*p)*p;
+        z.scale=ss+(ts-ss)*e; z.tx=stx+(ttx-stx)*e; z.ty=sty+(tty-sty)*e;
+        g.setAttribute('transform',`translate(${z.tx},${z.ty}) scale(${z.scale})`);
+        const lbl=document.getElementById('zlbl-perforacion_geotermica');
+        if(lbl) lbl.textContent=Math.round(z.scale*100)+'%';
+        if(p<1) requestAnimationFrame(tick);
+        else { z.scale=ts; z.tx=ttx; z.ty=tty; }
+      };
+      requestAnimationFrame(tick);
+    },
+    render(cur) {
+      const show = id => { const e=document.getElementById(id); if(e) e.style.opacity='1'; };
+      const hide = id => { const e=document.getElementById(id); if(e) e.style.opacity='0'; };
+      ['pg-s1','pg-s2','pg-s3','pg-s4','pg-s5'].forEach(hide);
+      show('pg-s' + (cur+1));
+      const zt = this._zTargets[cur];
+      this._animZ(zt.scale, zt.tx, zt.ty);
     }
   },
 
